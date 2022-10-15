@@ -26,15 +26,15 @@ stock integer
 
 CREATE TABLE rincian (
 id_rincian varchar(255) PRIMARY KEY,
-nota_id varchar(100),
-menu_id varchar(100),
+nota_id varchar(255),
+menu_id varchar(255),
 kuantitas integer
 );
 
 CREATE TABLE nota_penjualan (
 id_nota varchar(255) PRIMARY KEY,
-pelanggan_id VARCHAR(100),
-karyawan_id varchar(100),
+pelanggan_id VARCHAR(255),
+karyawan_id varchar(255),
 waktu_pesan date,
 total integer
 );
