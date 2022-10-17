@@ -18,7 +18,7 @@ func (kc *KaryawanController) CreateNewKaryawan(ctx *gin.Context) {
 	var newKaryawan *model.Karyawan
 	err := ctx.ShouldBind(&newKaryawan)
 	if err != nil {
-		ctx.JSON(http.StatusOK, gin.H{
+		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
 	}
@@ -75,9 +75,9 @@ func (kc *KaryawanController) UpdateKaryawan(ctx *gin.Context) {
 	}
 }
 
-func (k *KaryawanController) GetKaryawanById(ctx *gin.Context) {
+func (kc *KaryawanController) GetKaryawanById(ctx *gin.Context) {
 	id := ctx.Param("id")
-	responseUc, _ := k.karyawanUseCase.GetKaryawanById(id)
+	responseUc, _ := kc.karyawanUseCase.GetKaryawanById(id)
 	if (responseUc == model.Karyawan{}) {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "Data tidak ditemukan",
@@ -90,9 +90,9 @@ func (k *KaryawanController) GetKaryawanById(ctx *gin.Context) {
 	}
 }
 
-func (k *KaryawanController) DeleteKaryawan(ctx *gin.Context) {
+func (kc *KaryawanController) DeleteKaryawan(ctx *gin.Context) {
 	id := ctx.Param("id")
-	err := k.karyawanUseCase.DeleteKaryawan(id)
+	err := kc.karyawanUseCase.DeleteKaryawan(id)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "id tidak ditemukan",

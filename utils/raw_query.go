@@ -14,4 +14,11 @@ const (
 	SelectKaryawanById = ` select id, nama, alamat, gaji, username, password, created_at, updated_at  from mst_karyawan where id=$1`
 	UpdateKaryawan     = `update mst_karyawan set nama=:nama, alamat=:alamat, gaji=:gaji, username=:username, password=:password where id=:id`
 	DeleteKaryawan     = `delete from mst_karyawan where id=$1`
+
+	// pelanggan
+	InsertPelanggan     = `insert into mst_pelanggan(id, nama, nohp, alamat) values (:id, :nama, :nohp, :alamat)`
+	SelectAllPelanggan  = `select id, nama, nohp, alamat, created_at, updated_at from mst_pelanggan limit $1 offset $2`
+	SelectPelangganById = `select id, nama, nohp, alamat, created_at, updated_at from mst_pelanggan where id=$1`
+	UpdatePelanggan     = `update mst_pelanggan set id=:id, nama=:nama, nohp=:nohp, alamat=:alamat where id=:id`
+	DeletePelanggan     = `delete from mst_pelanggan where id=$1`
 )

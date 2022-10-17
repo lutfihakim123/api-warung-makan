@@ -19,7 +19,7 @@ func (mc *MenuController) CreateNewMenu(ctx *gin.Context) {
 	var newMenu *model.Menu
 	err := ctx.ShouldBind(&newMenu)
 	if err != nil {
-		ctx.JSON(http.StatusOK, gin.H{
+		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
 	}

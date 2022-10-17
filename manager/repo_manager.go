@@ -5,6 +5,7 @@ import "api-warung-makan/repository"
 type RepositoryManager interface {
 	MenuRepository() repository.MenuRepository
 	KaryawanRepository() repository.KaryawanRepository
+	PelangganRepository() repository.PelangganRepository
 }
 
 type repositoryManager struct {
@@ -17,6 +18,10 @@ func (i *repositoryManager) MenuRepository() repository.MenuRepository {
 
 func (i *repositoryManager) KaryawanRepository() repository.KaryawanRepository {
 	return repository.NewKaryawanRepository(i.infra.SqlDB())
+}
+
+func (i *repositoryManager) PelangganRepository() repository.PelangganRepository {
+	return repository.NewPelangganRepository(i.infra.SqlDB())
 }
 
 func NewRepositoryManager(infra InfraManager) RepositoryManager {
