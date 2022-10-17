@@ -30,6 +30,7 @@ func Server() *appServer {
 
 func (a *appServer) initHandlers() {
 	controller.NewMenuController(a.engine, a.useCaseManager.MenuUseCase())
+	controller.NewKaryawanController(a.engine, a.useCaseManager.KaryawanUseCase())
 }
 
 func (a *appServer) Run() {

@@ -4,6 +4,7 @@ import "api-warung-makan/usecase"
 
 type UseCaseManager interface {
 	MenuUseCase() usecase.MenuUseCase
+	KaryawanUseCase() usecase.KaryawanUseCase
 }
 
 type useCaseManager struct {
@@ -12,6 +13,10 @@ type useCaseManager struct {
 
 func (u *useCaseManager) MenuUseCase() usecase.MenuUseCase {
 	return usecase.NewMenuUseCase(u.repo.MenuRepository())
+}
+
+func (u *useCaseManager) KaryawanUseCase() usecase.KaryawanUseCase {
+	return usecase.NewKaryawanUseCase(u.repo.KaryawanRepository())
 }
 
 func NewUseCaseManager(repo RepositoryManager) UseCaseManager {
