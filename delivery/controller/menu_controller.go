@@ -4,6 +4,7 @@ import (
 	"api-warung-makan/model"
 	"api-warung-makan/usecase"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -16,11 +17,18 @@ type MenuController struct {
 
 func (mc *MenuController) CreateNewMenu(ctx *gin.Context) {
 	var newMenu *model.Menu
-	err := ctx.BindJSON(&newMenu)
+	err := ctx.ShouldBind(&newMenu)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
+		ctx.JSON(http.StatusOK, gin.H{
 			"message": err.Error(),
 		})
+	}
+	img, _ := ctx.FormFile("img")
+	if img != nil {
+		ctx.SaveUploadedFile(img, "assets/img/menu/"+img.Filename)
+		newMenu.Img = img.Filename
+	} else {
+		newMenu.Img = ""
 	}
 	mc.menuUseCase.CreateNewMenu(newMenu)
 	ctx.JSON(http.StatusOK, gin.H{
@@ -55,12 +63,19 @@ func (mc *MenuController) GetAllMenu(ctx *gin.Context) {
 
 func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 	var newMenu *model.Menu
-	err := ctx.BindJSON(&newMenu)
+	err := ctx.ShouldBind(&newMenu)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
 	} else {
+		img, _ := ctx.FormFile("img")
+		if img != nil {
+			ctx.SaveUploadedFile(img, "assets/img/menu/"+img.Filename)
+			newMenu.Img = img.Filename
+		} else {
+			newMenu.Img = ""
+		}
 		err := mc.menuUseCase.UpdateMenu(*newMenu)
 		if err != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{
@@ -75,20 +90,6 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 	}
 }
 
-func (m *MenuController) DeleteMenu(ctx *gin.Context) {
-	idMenu := ctx.Param("id")
-	err := m.menuUseCase.DeleteMenu(idMenu)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": "id tidak ditemukan",
-		})
-	} else {
-		ctx.JSON(http.StatusOK, gin.H{
-			"message": "OK",
-		})
-	}
-}
-
 func (m *MenuController) GetMenuById(ctx *gin.Context) {
 	idMenu := ctx.Param("id")
 	responseUc, _ := m.menuUseCase.GetMenuById(idMenu)
@@ -100,6 +101,24 @@ func (m *MenuController) GetMenuById(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
 			"message": "OK",
 			"data":    responseUc,
+		})
+	}
+}
+
+func (m *MenuController) DeleteMenu(ctx *gin.Context) {
+	id := ctx.Param("id")
+	responseUc, _ := m.menuUseCase.GetMenuById(id)
+	err := m.menuUseCase.DeleteMenu(id)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "id tidak ditemukan",
+		})
+	} else {
+		path := "assets/img/menu/" + responseUc.Img
+		err := os.Remove(path)
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": "ok",
+			"error":   err,
 		})
 	}
 }

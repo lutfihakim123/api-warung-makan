@@ -26,6 +26,7 @@ nama VARCHAR(100),
 jenis VARCHAR(100),
 harga integer,
 stock integer,
+img    varchar(100),
 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 updated_at timestamp
 );
