@@ -5,7 +5,7 @@ const (
 	InsertMenu     = `insert into mst_menu(id, nama, jenis, harga, stock, img) values (:id, :nama, :jenis, :harga, :stock, :img)`
 	SelectAllMenu  = `select id,  nama, jenis, harga, stock, img, created_at, updated_at  from mst_menu limit $1 offset $2`
 	SelectMenuById = `select id, nama, jenis, harga, stock, img, created_at, updated_at from mst_menu where id=$1`
-	UpdateMenu     = `update mst_menu set nama=:nama, jenis=:jenis, harga=:harga, stock=:stock where id=:id`
+	UpdateMenu     = `update mst_menu set nama=:nama, jenis=:jenis, harga=:harga, img=:img,  stock=:stock where id=:id`
 	DeleteMenu     = `delete from mst_menu where id=$1`
 
 	// karyawan
@@ -21,4 +21,11 @@ const (
 	SelectPelangganById = `select id, nama, nohp, alamat, created_at, updated_at from mst_pelanggan where id=$1`
 	UpdatePelanggan     = `update mst_pelanggan set id=:id, nama=:nama, nohp=:nohp, alamat=:alamat where id=:id`
 	DeletePelanggan     = `delete from mst_pelanggan where id=$1`
+
+	//nota penjualan
+	InsertNota     = `insert into nota_penjualan(id, pelanggan_id, karyawan_id, waktu_pesan) values (:id, :pelangganid, :karyawanid, :waktupesan)`
+	SelectAllNota  = `select nota_penjualan.id, nota_penjualan.pelanggan_id, nota_penjualan.karyawan_id, nota_penjualan.waktu_pesan, menu.harga, rincian.total  created_at, updated_at from nota_penjualan inner join rincian on nota_penjualan.id=rincian.nota_id inner join menu on rincian.menu_id=menu.id limit $1 offset $2`
+	SelectNotaById = `select nota_penjualan.id, nota_penjualan.pelanggan_id, nota_penjualan.karyawan_id, nota_penjualan.waktu_pesan, menu.harga, rincian.total  created_at, updated_at from nota_penjualan inner join rincian on nota_penjualan.id=rincian.nota_id inner join menu on rincian.menu_id=menu.id where nota_penjualan.id=$1`
+	UpdateNota     = `update nota_penjualan set pelanggan_id=:pelangganid, karyawan_id=:karyawanid where id=:id`
+	DeleteNota     = `delete from nota_penjualan where id=$1`
 )

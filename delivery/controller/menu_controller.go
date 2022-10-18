@@ -3,9 +3,11 @@ package controller
 import (
 	"api-warung-makan/model"
 	"api-warung-makan/usecase"
+	"api-warung-makan/utils"
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,8 +27,9 @@ func (mc *MenuController) CreateNewMenu(ctx *gin.Context) {
 	}
 	img, _ := ctx.FormFile("img")
 	if img != nil {
+		path := utils.Base_url + "menu/image/" + img.Filename
 		ctx.SaveUploadedFile(img, "assets/img/menu/"+img.Filename)
-		newMenu.Img = img.Filename
+		newMenu.Img = path
 	} else {
 		newMenu.Img = ""
 	}
@@ -69,13 +72,25 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 			"message": err.Error(),
 		})
 	} else {
-		img, _ := ctx.FormFile("img")
-		if img != nil {
-			ctx.SaveUploadedFile(img, "assets/img/menu/"+img.Filename)
-			newMenu.Img = img.Filename
-		} else {
-			newMenu.Img = ""
+		responseUc, _ := mc.menuUseCase.GetMenuById(newMenu.Id)
+		nameFile := strings.Split(responseUc.Img, "/")
+		path := "assets/img/menu/" + nameFile[4]
+		error := os.Remove(path)
+		if error != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{
+				"message": err.Error(),
+			})
 		}
+		img, _ := ctx.FormFile("img")
+		var tempImg string
+		if img != nil {
+			path := utils.Base_url + "menu/image/" + img.Filename
+			ctx.SaveUploadedFile(img, "assets/img/menu/"+img.Filename)
+			tempImg = path
+		} else {
+			tempImg = ""
+		}
+		newMenu.Img = tempImg
 		err := mc.menuUseCase.UpdateMenu(*newMenu)
 		if err != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{
@@ -90,9 +105,9 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 	}
 }
 
-func (m *MenuController) GetMenuById(ctx *gin.Context) {
+func (mc *MenuController) GetMenuById(ctx *gin.Context) {
 	idMenu := ctx.Param("id")
-	responseUc, _ := m.menuUseCase.GetMenuById(idMenu)
+	responseUc, _ := mc.menuUseCase.GetMenuById(idMenu)
 	if (responseUc == model.Menu{}) {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "Data tidak ditemukan",
@@ -105,22 +120,29 @@ func (m *MenuController) GetMenuById(ctx *gin.Context) {
 	}
 }
 
-func (m *MenuController) DeleteMenu(ctx *gin.Context) {
+func (mc *MenuController) DeleteMenu(ctx *gin.Context) {
 	id := ctx.Param("id")
-	responseUc, _ := m.menuUseCase.GetMenuById(id)
-	err := m.menuUseCase.DeleteMenu(id)
+	responseUc, _ := mc.menuUseCase.GetMenuById(id)
+	err := mc.menuUseCase.DeleteMenu(id)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "id tidak ditemukan",
 		})
 	} else {
-		path := "assets/img/menu/" + responseUc.Img
+		nameFile := strings.Split(responseUc.Img, "/")
+		path := "assets/img/menu/" + nameFile[4]
 		err := os.Remove(path)
 		ctx.JSON(http.StatusOK, gin.H{
 			"message": "ok",
 			"error":   err,
 		})
 	}
+}
+
+func (mc *MenuController) GetImageMenu(ctx *gin.Context) {
+	img := ctx.Param("img")
+	image := "assets/img/menu/" + img
+	ctx.File(image)
 }
 
 func NewMenuController(router *gin.Engine, menuUseCase usecase.MenuUseCase) *MenuController {
@@ -132,6 +154,7 @@ func NewMenuController(router *gin.Engine, menuUseCase usecase.MenuUseCase) *Men
 	menu.POST("", newMenuController.CreateNewMenu)
 	menu.GET("", newMenuController.GetAllMenu)
 	menu.GET("/:id", newMenuController.GetMenuById)
+	menu.GET("/image/:img", newMenuController.GetImageMenu)
 	menu.PUT("", newMenuController.UpdateMenu)
 	menu.DELETE("/:id", newMenuController.DeleteMenu)
 	return &newMenuController

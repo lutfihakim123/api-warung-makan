@@ -32,6 +32,7 @@ func (a *appServer) initHandlers() {
 	controller.NewMenuController(a.engine, a.useCaseManager.MenuUseCase())
 	controller.NewKaryawanController(a.engine, a.useCaseManager.KaryawanUseCase())
 	controller.NewPelangganController(a.engine, a.useCaseManager.PelangganUseCase())
+	controller.NewNotaController(a.engine, a.useCaseManager.NotaUseCase())
 }
 
 func (a *appServer) Run() {
