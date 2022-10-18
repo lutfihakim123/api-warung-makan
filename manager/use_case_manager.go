@@ -8,6 +8,7 @@ type UseCaseManager interface {
 	PelangganUseCase() usecase.PelangganUseCase
 	NotaUseCase() usecase.NotaUseCase
 	MejaUseCase() usecase.MejaUseCase
+	RincianUseCase() usecase.RincianUseCase
 }
 
 type useCaseManager struct {
@@ -32,6 +33,10 @@ func (u *useCaseManager) NotaUseCase() usecase.NotaUseCase {
 
 func (u *useCaseManager) MejaUseCase() usecase.MejaUseCase {
 	return usecase.NewMejaUseCase(u.repo.MejaRepository())
+}
+
+func (u *useCaseManager) RincianUseCase() usecase.RincianUseCase {
+	return usecase.NewRincianUseCase(u.repo.RincianRepository())
 }
 
 func NewUseCaseManager(repo RepositoryManager) UseCaseManager {

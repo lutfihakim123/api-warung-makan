@@ -13,6 +13,7 @@ type NotaRepository interface {
 	List(page int, totalRows int) ([]model.Nota, error)
 	Update(newNota *model.Nota) error
 	Get(id string) (model.Nota, error)
+	GetMeja(id string) (model.Meja, error)
 	Delete(id string) error
 }
 
@@ -21,7 +22,10 @@ type notaRepository struct {
 }
 
 func (n *notaRepository) Insert(newNota *model.Nota) error {
-	_, err := n.db.NamedExec(utils.InsertNota, newNota)
+	tx := n.db.MustBegin()
+	tx.NamedExec(utils.UpdateStatusMeja, newNota)
+	tx.NamedExec(utils.InsertNota, newNota)
+	err := tx.Commit()
 	if err != nil {
 		return err
 	}
@@ -49,8 +53,20 @@ func (n *notaRepository) Get(id string) (model.Nota, error) {
 	return nota, nil
 }
 
+func (n *notaRepository) GetMeja(id string) (model.Meja, error) {
+	var meja model.Meja
+	err := n.db.Get(&meja, utils.SelectMejaById, id)
+	if err != nil {
+		return model.Meja{}, err
+	}
+	return meja, nil
+}
+
 func (n *notaRepository) Update(newNota *model.Nota) error {
-	_, err := n.db.NamedExec(utils.UpdateNota, newNota)
+	tx := n.db.MustBegin()
+	tx.NamedExec(utils.UpdateStatusMeja, newNota)
+	tx.NamedExec(utils.UpdateNota, newNota)
+	err := tx.Commit()
 	if err != nil {
 		return err
 	}

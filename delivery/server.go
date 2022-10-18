@@ -34,6 +34,7 @@ func (a *appServer) initHandlers() {
 	controller.NewPelangganController(a.engine, a.useCaseManager.PelangganUseCase())
 	controller.NewNotaController(a.engine, a.useCaseManager.NotaUseCase())
 	controller.NewMejaController(a.engine, a.useCaseManager.MejaUseCase())
+	controller.NewRincianController(a.engine, a.useCaseManager.RincianUseCase())
 }
 
 func (a *appServer) Run() {

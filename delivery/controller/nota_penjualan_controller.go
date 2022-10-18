@@ -23,11 +23,19 @@ func (nc *NotaController) CreateNewNota(ctx *gin.Context) {
 			"message": err.Error(),
 		})
 	}
-	nc.notaUseCase.CreateNewNota(newNota)
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": "ok",
-		"data":    newNota,
-	})
+	responseUc, _ := nc.notaUseCase.GetMejaById(newNota.MejaId)
+	if responseUc.Status != "availabe" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "meja sedang tidak dapat di gunakan",
+			"data":    responseUc.Status,
+		})
+	} else {
+		nc.notaUseCase.CreateNewNota(newNota)
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": "ok",
+			"data":    newNota,
+		})
+	}
 }
 
 func (nc *NotaController) GetAllNota(ctx *gin.Context) {
@@ -97,7 +105,7 @@ func (nc *NotaController) DeleteNota(ctx *gin.Context) {
 	err := nc.notaUseCase.DeleteNota(id)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": "id tidak ditemukan",
+			"message": err.Error(),
 		})
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{

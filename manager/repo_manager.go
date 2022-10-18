@@ -8,6 +8,7 @@ type RepositoryManager interface {
 	PelangganRepository() repository.PelangganRepository
 	NotaRepository() repository.NotaRepository
 	MejaRepository() repository.MejaRepository
+	RincianRepository() repository.RincianRepository
 }
 
 type repositoryManager struct {
@@ -32,6 +33,10 @@ func (i *repositoryManager) NotaRepository() repository.NotaRepository {
 
 func (i *repositoryManager) MejaRepository() repository.MejaRepository {
 	return repository.NewMejaRepository(i.infra.SqlDB())
+}
+
+func (i *repositoryManager) RincianRepository() repository.RincianRepository {
+	return repository.NewRincianRepository(i.infra.SqlDB())
 }
 
 func NewRepositoryManager(infra InfraManager) RepositoryManager {

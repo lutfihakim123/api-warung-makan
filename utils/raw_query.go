@@ -1,6 +1,7 @@
 package utils
 
 const (
+
 	// menu
 	InsertMenu     = `insert into mst_menu(id, nama, jenis, harga, stock, img) values (:id, :nama, :jenis, :harga, :stock, :img)`
 	SelectAllMenu  = `select id,  nama, jenis, harga, stock, img, created_at, updated_at  from mst_menu limit $1 offset $2`
@@ -30,9 +31,22 @@ const (
 	DeleteMeja     = `delete from mst_meja where id=$1`
 
 	//nota penjualan
-	InsertNota     = `insert into nota_penjualan(id, pelanggan_id, karyawan_id, meja_id, waktu_pesan) values (:id, :pelangganid, :karyawanid, :mejaid, :waktupesan)`
-	SelectAllNota  = `select nota_penjualan.id, nota_penjualan.pelanggan_id, nota_penjualan.karyawan_id, nota_penjualan.waktu_pesan, menu.harga, rincian.total  created_at, updated_at from nota_penjualan inner join rincian on nota_penjualan.id=rincian.nota_id inner join menu on rincian.menu_id=menu.id limit $1 offset $2`
-	SelectNotaById = `select nota_penjualan.id, nota_penjualan.pelanggan_id, nota_penjualan.karyawan_id, nota_penjualan.waktu_pesan, menu.harga, rincian.total  created_at, updated_at from nota_penjualan inner join rincian on nota_penjualan.id=rincian.nota_id inner join menu on rincian.menu_id=menu.id where nota_penjualan.id=$1`
-	UpdateNota     = `update nota_penjualan set pelanggan_id=:pelangganid,  karyawan_id=:karyawanid, meja_id=:mejaid where id=:id`
-	DeleteNota     = `delete from nota_penjualan where id=$1`
+	InsertNota       = `insert into nota_penjualan(id, pelanggan_id, karyawan_id, meja_id, waktu_pesan) values (:id, :pelanggan_id, :karyawan_id, :meja_id, :waktu_pesan)`
+	SelectAllNota    = `SELECT nota_penjualan.Id as id, mst_pelanggan.id as pelanggan_id, mst_karyawan.id as karyawan_id, mst_meja.id as meja_id,  mst_meja.no_meja as no_meja, rincian.menu_id as menu_id, mst_pelanggan.nama as nama_pelanggan, mst_karyawan.nama as nama_karyawan, mst_menu.nama as nama_menu, mst_menu.harga as harga_menu, rincian.kuantitas as kuantitas, nota_penjualan.waktu_pesan as waktu_pesan, rincian.total as total, mst_menu.img as image_menu, rincian.created_at as created_at, rincian.updated_at from mst_menu inner join rincian on mst_menu.id=rincian.menu_id inner join nota_penjualan ON rincian.nota_id=nota_penjualan.id  inner join mst_pelanggan ON mst_pelanggan.id = nota_penjualan.pelanggan_id inner join mst_karyawan ON mst_karyawan.id = nota_penjualan.karyawan_id inner join mst_meja on mst_meja.id=nota_penjualan.meja_id limit $1 offset $2`
+	SelectNotaById   = `SELECT nota_penjualan.Id as id, mst_pelanggan.id as pelanggan_id, mst_karyawan.id as karyawan_id, mst_meja.id as meja_id,  mst_meja.no_meja as no_meja, rincian.menu_id as menu_id, mst_pelanggan.nama as nama_pelanggan, mst_karyawan.nama as nama_karyawan, mst_menu.nama as nama_menu, mst_menu.harga as harga_menu, rincian.kuantitas as kuantitas, nota_penjualan.waktu_pesan as waktu_pesan, rincian.total as total, mst_menu.img as image_menu, rincian.created_at as created_at, rincian.updated_at from mst_menu inner join rincian on mst_menu.id=rincian.menu_id inner join nota_penjualan ON rincian.nota_id=nota_penjualan.id  inner join mst_pelanggan ON mst_pelanggan.id = nota_penjualan.pelanggan_id inner join mst_karyawan ON mst_karyawan.id = nota_penjualan.karyawan_id inner join mst_meja on mst_meja.id=nota_penjualan.meja_id where nota_penjualan.id=$1`
+	UpdateNota       = `update nota_penjualan set pelanggan_id=:pelanggan_id,  karyawan_id=:karyawan_id, meja_id=:meja_id where id=:id`
+	DeleteNota       = `delete from nota_penjualan where id=$1`
+	UpdateStatusMeja = `update mst_meja set status='used' where id=:meja_id`
+
+	//rincian
+	UpdateStockMenu  = `update mst_menu set stock=:temp_stock where id=:menu_id`
+	InsertRincian    = `insert into rincian(id, nota_id, menu_id, kuantitas, total) values (:id, :nota_id, :menu_id, :kuantitas, :total)`
+	UpdateRincian    = `update rincian set nota_id=:nota_id,  menu_id=:menu_id, kuantitas=:kuantitas, total=:total where id=:id`
+	DeleteRincian    = `delete from rincian where id=$1`
+	SelectAllRincian = `SELECT rincian.Id as id, rincian.nota_id as nota_id, mst_meja.no_meja as no_meja, rincian.menu_id as menu_id, mst_pelanggan.nama as nama_pelanggan, mst_karyawan.nama as nama_karyawan, mst_menu.nama as nama_menu, mst_menu.harga as harga_menu, rincian.kuantitas as kuantitas, nota_penjualan.waktu_pesan as waktu_pesan,
+	rincian.total as total, mst_menu.img as image_menu, rincian.created_at as created_at, rincian.updated_at from mst_menu inner join rincian on mst_menu.id=rincian.menu_id inner join nota_penjualan ON rincian.nota_id=nota_penjualan.id  inner join mst_pelanggan ON mst_pelanggan.id = nota_penjualan.pelanggan_id 
+	inner join mst_karyawan ON mst_karyawan.id = nota_penjualan.karyawan_id inner join mst_meja on mst_meja.id=nota_penjualan.meja_id limit $1 offset $2`
+	SelectRincianById = `SELECT rincian.Id as id, rincian.nota_id as nota_id, mst_meja.no_meja as no_meja, rincian.menu_id as menu_id, mst_pelanggan.nama as nama_pelanggan, mst_karyawan.nama as nama_karyawan, mst_menu.nama as nama_menu, mst_menu.harga as harga_menu, rincian.kuantitas as kuantitas, nota_penjualan.waktu_pesan as waktu_pesan,
+	rincian.total as total, mst_menu.img as image_menu, rincian.created_at as created_at, rincian.updated_at from mst_menu inner join rincian on mst_menu.id=rincian.menu_id inner join nota_penjualan ON rincian.nota_id=nota_penjualan.id  inner join mst_pelanggan ON mst_pelanggan.id = nota_penjualan.pelanggan_id 
+	inner join mst_karyawan ON mst_karyawan.id = nota_penjualan.karyawan_id inner join mst_meja on mst_meja.id=nota_penjualan.meja_id where rincian.id=$1`
 )

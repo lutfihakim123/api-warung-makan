@@ -13,6 +13,7 @@ type NotaUseCase interface {
 	UpdateNota(newNota model.Nota) error
 	DeleteNota(id string) error
 	GetNotaById(id string) (model.Nota, error)
+	GetMejaById(id string) (model.Meja, error)
 }
 
 type notaUseCase struct {
@@ -39,6 +40,9 @@ func (n *notaUseCase) DeleteNota(id string) error {
 
 func (n *notaUseCase) GetNotaById(id string) (model.Nota, error) {
 	return n.repo.Get(id)
+}
+func (n *notaUseCase) GetMejaById(id string) (model.Meja, error) {
+	return n.repo.GetMeja(id)
 }
 
 func NewNotaUseCase(repo repository.NotaRepository) NotaUseCase {
