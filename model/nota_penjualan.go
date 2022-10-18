@@ -10,6 +10,7 @@ type Nota struct {
 	PelangganId   string    `json:"pelangganid" binding:"required"`
 	KaryawanId    string    `json:"karyawanid" binding:"required"`
 	WaktuPesan    time.Time `json:"waktupesan"`
+	MejaId        string    `json:"mejaid" binding:"required"`
 	Harga         int
 	Total         int
 	NamaPelanggan string

@@ -31,6 +31,15 @@ created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 updated_at timestamp
 );
 
+CREATE TABLE mst_meja (
+id varchar(255) PRIMARY KEY,
+no_meja VARCHAR(100),
+status VARCHAR(100),
+created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+updated_at timestamp
+);
+
+
 CREATE TABLE rincian (
 id varchar(255) PRIMARY KEY,
 nota_id varchar(255),
@@ -44,6 +53,7 @@ CREATE TABLE nota_penjualan (
 id varchar(255) PRIMARY KEY,
 pelanggan_id VARCHAR(255),
 karyawan_id varchar(255),
+meja_id varchar(255),
 waktu_pesan date,
 total integer,
 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -63,6 +73,9 @@ ADD CONSTRAINT fk_nota_pelanggan FOREIGN KEY (pelanggan_id) REFERENCES mst_pelan
 
 ALTER TABLE nota_penjualan
 ADD CONSTRAINT fk_nota_karyawan FOREIGN KEY (karyawan_id) REFERENCES mst_karyawan (id);
+
+ALTER TABLE nota_penjualan
+ADD CONSTRAINT fk_nota_meja FOREIGN KEY (meja_id) REFERENCES mst_meja (id);
 
 -- end foreign key
 

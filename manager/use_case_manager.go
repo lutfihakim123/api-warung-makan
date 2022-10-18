@@ -7,6 +7,7 @@ type UseCaseManager interface {
 	KaryawanUseCase() usecase.KaryawanUseCase
 	PelangganUseCase() usecase.PelangganUseCase
 	NotaUseCase() usecase.NotaUseCase
+	MejaUseCase() usecase.MejaUseCase
 }
 
 type useCaseManager struct {
@@ -24,8 +25,13 @@ func (u *useCaseManager) KaryawanUseCase() usecase.KaryawanUseCase {
 func (u *useCaseManager) PelangganUseCase() usecase.PelangganUseCase {
 	return usecase.NewPelangganUseCase(u.repo.PelangganRepository())
 }
+
 func (u *useCaseManager) NotaUseCase() usecase.NotaUseCase {
 	return usecase.NewNotaUseCase(u.repo.NotaRepository())
+}
+
+func (u *useCaseManager) MejaUseCase() usecase.MejaUseCase {
+	return usecase.NewMejaUseCase(u.repo.MejaRepository())
 }
 
 func NewUseCaseManager(repo RepositoryManager) UseCaseManager {
