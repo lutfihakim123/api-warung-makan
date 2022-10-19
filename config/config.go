@@ -2,9 +2,7 @@ package config
 
 import (
 	"fmt"
-	"time"
 
-	"github.com/golang-jwt/jwt"
 	_ "github.com/lib/pq"
 )
 
@@ -16,17 +14,9 @@ type DbConfig struct {
 	DataSourceName string
 }
 
-type TokenConfig struct {
-	ApplicationName     string
-	JwtSignatureKey     string
-	JwtSigningMethod    *jwt.SigningMethodHMAC
-	AccessTokenLifeTime time.Duration
-}
-
 type Config struct {
 	ApiConfig
 	DbConfig
-	TokenConfig
 }
 
 func (c *Config) readConfig() {
@@ -43,12 +33,6 @@ func (c *Config) readConfig() {
 	}
 	c.DbConfig = DbConfig{
 		DataSourceName: dsn,
-	}
-	c.TokenConfig = TokenConfig{
-		ApplicationName:     "ENIGMA",
-		JwtSignatureKey:     "root",
-		JwtSigningMethod:    jwt.SigningMethodHS256,
-		AccessTokenLifeTime: 60 * time.Second,
 	}
 }
 

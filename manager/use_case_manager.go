@@ -9,6 +9,7 @@ type UseCaseManager interface {
 	NotaUseCase() usecase.NotaUseCase
 	MejaUseCase() usecase.MejaUseCase
 	RincianUseCase() usecase.RincianUseCase
+	AuthUseCase() usecase.AuthUseCase
 }
 
 type useCaseManager struct {
@@ -37,6 +38,10 @@ func (u *useCaseManager) MejaUseCase() usecase.MejaUseCase {
 
 func (u *useCaseManager) RincianUseCase() usecase.RincianUseCase {
 	return usecase.NewRincianUseCase(u.repo.RincianRepository())
+}
+
+func (u *useCaseManager) AuthUseCase() usecase.AuthUseCase {
+	return usecase.NewAuthUseCase(u.repo.AuthRepository())
 }
 
 func NewUseCaseManager(repo RepositoryManager) UseCaseManager {

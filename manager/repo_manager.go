@@ -9,6 +9,7 @@ type RepositoryManager interface {
 	NotaRepository() repository.NotaRepository
 	MejaRepository() repository.MejaRepository
 	RincianRepository() repository.RincianRepository
+	AuthRepository() repository.AuthRepository
 }
 
 type repositoryManager struct {
@@ -37,6 +38,10 @@ func (i *repositoryManager) MejaRepository() repository.MejaRepository {
 
 func (i *repositoryManager) RincianRepository() repository.RincianRepository {
 	return repository.NewRincianRepository(i.infra.SqlDB())
+}
+
+func (i *repositoryManager) AuthRepository() repository.AuthRepository {
+	return repository.NewAuthRepository(i.infra.SqlDB())
 }
 
 func NewRepositoryManager(infra InfraManager) RepositoryManager {

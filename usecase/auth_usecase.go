@@ -2,31 +2,23 @@ package usecase
 
 import (
 	"api-warung-makan/model"
-	"api-warung-makan/utils/authenticator"
+	"api-warung-makan/repository"
 )
 
 type AuthUseCase interface {
-	UserAuth(user model.UserCredential) (token string, err error)
+	LoginKaryawan(username string, password string) (model.Credential, error)
 }
 
 type authUseCase struct {
-	tokenService authenticator.AccessToken
+	repo repository.AuthRepository
 }
 
-func (a *authUseCase) UserAuth(user model.UserCredential) (token string, err error) {
-	if user.Username == "enigma" && user.Password == "123" {
-		token, err := a.tokenService.CreateAccessToken(&user)
-		if err != nil {
-			return "salah", err
-		}
-		return token, nil
-	} else {
-		return "salah", nil
-	}
+func (a *authUseCase) LoginKaryawan(username string, password string) (model.Credential, error) {
+	return a.repo.Login(username, password)
 }
 
-func NewAuthUseCase(service authenticator.AccessToken) AuthUseCase {
-	authUseCase := new(authUseCase)
-	authUseCase.tokenService = service
-	return authUseCase
+func NewAuthUseCase(repo repository.AuthRepository) AuthUseCase {
+	pc := new(authUseCase)
+	pc.repo = repo
+	return pc
 }
