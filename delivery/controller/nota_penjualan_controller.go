@@ -62,6 +62,30 @@ func (nc *NotaController) GetAllNota(ctx *gin.Context) {
 	}
 }
 
+func (nc *NotaController) GetAllReport(ctx *gin.Context) {
+	var err error
+	page, _ := strconv.Atoi(ctx.Query("page"))
+	totalRows, _ := strconv.Atoi(ctx.Query("totalRows"))
+	if page == 0 || totalRows == 0 {
+		page = 1
+		totalRows = 10
+	}
+	report, err := nc.notaUseCase.GetAllReport(page, totalRows)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": err.Error(),
+			"data":    report,
+		})
+	} else {
+		ctx.JSON(http.StatusOK, gin.H{
+			"message":   "OK",
+			"data":      report,
+			"page":      page,
+			"totalRows": totalRows,
+		})
+	}
+}
+
 func (nc *NotaController) UpdateNota(ctx *gin.Context) {
 	var newNota *model.Nota
 	err := ctx.ShouldBind(&newNota)
@@ -100,6 +124,21 @@ func (nc *NotaController) GetNotaById(ctx *gin.Context) {
 	}
 }
 
+func (nc *NotaController) GetReportById(ctx *gin.Context) {
+	id := ctx.Param("id")
+	responseUc, _ := nc.notaUseCase.GetReportById(id)
+	if (responseUc == model.ReportPenjualan{}) {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Data tidak ditemukan",
+		})
+	} else {
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": "OK",
+			"data":    responseUc,
+		})
+	}
+}
+
 func (nc *NotaController) DeleteNota(ctx *gin.Context) {
 	id := ctx.Param("id")
 	err := nc.notaUseCase.DeleteNota(id)
@@ -125,5 +164,8 @@ func NewNotaController(router *gin.Engine, notaUseCase usecase.NotaUseCase) *Not
 	nota.GET("/:id", newNotaController.GetNotaById)
 	nota.PUT("", newNotaController.UpdateNota)
 	nota.DELETE("/:id", newNotaController.DeleteNota)
+	report := router.Group("report")
+	report.GET("", newNotaController.GetAllReport)
+	report.GET("/:id", newNotaController.GetReportById)
 	return &newNotaController
 }

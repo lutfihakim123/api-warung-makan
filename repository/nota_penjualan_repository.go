@@ -11,8 +11,10 @@ import (
 type NotaRepository interface {
 	Insert(newNota *model.Nota) error
 	List(page int, totalRows int) ([]model.Nota, error)
-	Update(newNota *model.Nota) error
 	Get(id string) (model.Nota, error)
+	ListReport(page int, totalRows int) ([]model.ReportPenjualan, error)
+	GetReport(id string) (model.ReportPenjualan, error)
+	Update(newNota *model.Nota) error
 	GetMeja(id string) (model.Meja, error)
 	Delete(id string) error
 }
@@ -44,6 +46,17 @@ func (n *notaRepository) List(page int, totalRows int) ([]model.Nota, error) {
 	return nota, nil
 }
 
+func (n *notaRepository) ListReport(page int, totalRows int) ([]model.ReportPenjualan, error) {
+	limit := totalRows
+	offset := limit * (page - 1)
+	var report []model.ReportPenjualan
+	err := n.db.Select(&report, utils.SelectAllReport, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+	return report, nil
+}
+
 func (n *notaRepository) Get(id string) (model.Nota, error) {
 	var nota model.Nota
 	err := n.db.Get(&nota, utils.SelectNotaById, id)
@@ -51,6 +64,15 @@ func (n *notaRepository) Get(id string) (model.Nota, error) {
 		return model.Nota{}, err
 	}
 	return nota, nil
+}
+
+func (n *notaRepository) GetReport(id string) (model.ReportPenjualan, error) {
+	var report model.ReportPenjualan
+	err := n.db.Get(&report, utils.SelectReportById, id)
+	if err != nil {
+		return model.ReportPenjualan{}, err
+	}
+	return report, nil
 }
 
 func (n *notaRepository) GetMeja(id string) (model.Meja, error) {

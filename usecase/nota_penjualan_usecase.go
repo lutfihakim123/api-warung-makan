@@ -10,9 +10,11 @@ import (
 type NotaUseCase interface {
 	CreateNewNota(newNota *model.Nota) error
 	GetAllNota(page int, totalRows int) ([]model.Nota, error)
+	GetNotaById(id string) (model.Nota, error)
+	GetAllReport(page int, totalRows int) ([]model.ReportPenjualan, error)
+	GetReportById(id string) (model.ReportPenjualan, error)
 	UpdateNota(newNota model.Nota) error
 	DeleteNota(id string) error
-	GetNotaById(id string) (model.Nota, error)
 	GetMejaById(id string) (model.Meja, error)
 }
 
@@ -30,6 +32,10 @@ func (n *notaUseCase) GetAllNota(page int, totalRows int) ([]model.Nota, error) 
 	return n.repo.List(page, totalRows)
 }
 
+func (n *notaUseCase) GetAllReport(page int, totalRows int) ([]model.ReportPenjualan, error) {
+	return n.repo.ListReport(page, totalRows)
+}
+
 func (n *notaUseCase) UpdateNota(newNota model.Nota) error {
 	return n.repo.Update(&newNota)
 }
@@ -41,6 +47,11 @@ func (n *notaUseCase) DeleteNota(id string) error {
 func (n *notaUseCase) GetNotaById(id string) (model.Nota, error) {
 	return n.repo.Get(id)
 }
+
+func (n *notaUseCase) GetReportById(id string) (model.ReportPenjualan, error) {
+	return n.repo.GetReport(id)
+}
+
 func (n *notaUseCase) GetMejaById(id string) (model.Meja, error) {
 	return n.repo.GetMeja(id)
 }
