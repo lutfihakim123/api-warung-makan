@@ -78,7 +78,7 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 		error := os.Remove(path)
 		if error != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
+				"message": "data not found",
 			})
 		}
 		img, _ := ctx.FormFile("img")
