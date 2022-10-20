@@ -4,6 +4,7 @@ import (
 	"api-warung-makan/model"
 	"api-warung-makan/usecase"
 	"api-warung-makan/utils"
+	"fmt"
 	"net/http"
 	"os"
 	"strconv"
@@ -77,9 +78,7 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 		path := "assets/menu/" + nameFile[5]
 		error := os.Remove(path)
 		if error != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{
-				"message": "data not found",
-			})
+			fmt.Println("data not found")
 		}
 		img, _ := ctx.FormFile("img")
 		var tempImg string
