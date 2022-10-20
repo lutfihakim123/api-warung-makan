@@ -28,7 +28,7 @@ func (mc *MenuController) CreateNewMenu(ctx *gin.Context) {
 	img, _ := ctx.FormFile("img")
 	if img != nil {
 		path := utils.Base_url + "menu/image/" + img.Filename
-		ctx.SaveUploadedFile(img, "assets/img/menu/"+img.Filename)
+		ctx.SaveUploadedFile(img, "assets/menu/"+img.Filename)
 		newMenu.Img = path
 	} else {
 		newMenu.Img = ""
@@ -74,7 +74,7 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 	} else {
 		// responseUc, _ := mc.menuUseCase.GetMenuById(newMenu.Id)
 		// nameFile := strings.Split(responseUc.Img, "/")
-		// path := "assets/img/menu/" + nameFile[5]
+		// path := "assets/menu/" + nameFile[5]
 		// error := os.Remove(path)
 		// if error != nil {
 		// 	ctx.JSON(http.StatusBadRequest, gin.H{
@@ -85,7 +85,7 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 		var tempImg string
 		if img != nil {
 			path := utils.Base_url + "menu/image/" + img.Filename
-			ctx.SaveUploadedFile(img, "assets/img/menu/"+img.Filename)
+			ctx.SaveUploadedFile(img, "assets/menu/"+img.Filename)
 			tempImg = path
 		} else {
 			tempImg = ""
@@ -130,7 +130,7 @@ func (mc *MenuController) DeleteMenu(ctx *gin.Context) {
 		})
 	} else {
 		nameFile := strings.Split(responseUc.Img, "/")
-		path := "assets/img/menu/" + nameFile[5]
+		path := "assets/menu/" + nameFile[5]
 		err := os.Remove(path)
 		ctx.JSON(http.StatusOK, gin.H{
 			"message": "ok",
@@ -141,7 +141,7 @@ func (mc *MenuController) DeleteMenu(ctx *gin.Context) {
 
 func (mc *MenuController) GetImageMenu(ctx *gin.Context) {
 	img := ctx.Param("img")
-	image := "assets/img/menu/" + img
+	image := "assets/menu/" + img
 	ctx.File(image)
 }
 
