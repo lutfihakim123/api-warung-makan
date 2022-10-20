@@ -56,7 +56,6 @@ pelanggan_id VARCHAR(255),
 karyawan_id varchar(255),
 meja_id varchar(255),
 waktu_pesan date,
-total integer,
 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 updated_at timestamp
 );
