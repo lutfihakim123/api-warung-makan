@@ -31,6 +31,6 @@ type ReportPenjualan struct {
 	TempStock     sql.NullInt64  `json:"temp_stock" db:"temp_stock"`
 	Kuantitas     sql.NullInt64  `json:"kuantitas"`
 	Total         sql.NullInt64  `json:"total" db:"total"`
-	CreatedAt     string         `db:"created_at"`
+	CreatedAt     sql.NullTime   `db:"created_at"`
 	UpdatedAt     sql.NullTime   `db:"updated_at"`
 }
