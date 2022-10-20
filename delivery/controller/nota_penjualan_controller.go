@@ -24,7 +24,7 @@ func (nc *NotaController) CreateNewNota(ctx *gin.Context) {
 		})
 	}
 	responseUc, _ := nc.notaUseCase.GetMejaById(newNota.MejaId)
-	if responseUc.Status != "availabe" {
+	if responseUc.Status != "available" {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "meja sedang tidak dapat di gunakan",
 			"data":    responseUc.Status,

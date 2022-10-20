@@ -45,6 +45,7 @@ id varchar(255) PRIMARY KEY,
 nota_id varchar(255),
 menu_id varchar(255),
 kuantitas integer,
+total integer,
 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 updated_at timestamp
 );
