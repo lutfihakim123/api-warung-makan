@@ -72,15 +72,15 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 			"message": err.Error(),
 		})
 	} else {
-		responseUc, _ := mc.menuUseCase.GetMenuById(newMenu.Id)
-		nameFile := strings.Split(responseUc.Img, "/")
-		path := "assets/img/menu/" + nameFile[5]
-		error := os.Remove(path)
-		if error != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
-			})
-		}
+		// responseUc, _ := mc.menuUseCase.GetMenuById(newMenu.Id)
+		// nameFile := strings.Split(responseUc.Img, "/")
+		// path := "assets/img/menu/" + nameFile[5]
+		// error := os.Remove(path)
+		// if error != nil {
+		// 	ctx.JSON(http.StatusBadRequest, gin.H{
+		// 		"message": err.Error(),
+		// 	})
+		// }
 		img, _ := ctx.FormFile("img")
 		var tempImg string
 		if img != nil {
