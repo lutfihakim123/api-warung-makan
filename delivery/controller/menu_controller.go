@@ -74,7 +74,7 @@ func (mc *MenuController) UpdateMenu(ctx *gin.Context) {
 	} else {
 		responseUc, _ := mc.menuUseCase.GetMenuById(newMenu.Id)
 		nameFile := strings.Split(responseUc.Img, "/")
-		path := "assets/img/menu/" + nameFile[4]
+		path := "assets/img/menu/" + nameFile[3]
 		error := os.Remove(path)
 		if error != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{
@@ -130,11 +130,12 @@ func (mc *MenuController) DeleteMenu(ctx *gin.Context) {
 		})
 	} else {
 		nameFile := strings.Split(responseUc.Img, "/")
-		path := "assets/img/menu/" + nameFile[4]
+		path := "assets/img/menu/" + nameFile[3]
 		err := os.Remove(path)
+		error := err
 		ctx.JSON(http.StatusOK, gin.H{
 			"message": "ok",
-			"error":   err,
+			"error":   error,
 		})
 	}
 }
