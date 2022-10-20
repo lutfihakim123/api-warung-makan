@@ -150,7 +150,7 @@ func NewMenuController(router *gin.Engine, menuUseCase usecase.MenuUseCase) *Men
 		router:      router,
 		menuUseCase: menuUseCase,
 	}
-	menu := router.Group("warung/menu")
+	menu := router.Group("menu")
 	menu.POST("", newMenuController.CreateNewMenu)
 	menu.GET("", newMenuController.GetAllMenu)
 	menu.GET("/:id", newMenuController.GetMenuById)

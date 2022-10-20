@@ -119,7 +119,7 @@ func NewNotaController(router *gin.Engine, notaUseCase usecase.NotaUseCase) *Not
 		router:      router,
 		notaUseCase: notaUseCase,
 	}
-	nota := router.Group("warung/nota")
+	nota := router.Group("nota")
 	nota.POST("", newNotaController.CreateNewNota)
 	nota.GET("", newNotaController.GetAllNota)
 	nota.GET("/:id", newNotaController.GetNotaById)

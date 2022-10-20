@@ -109,7 +109,7 @@ func NewPelangganController(router *gin.Engine, pelangganUseCase usecase.Pelangg
 		router:           router,
 		pelangganUseCase: pelangganUseCase,
 	}
-	pelanggan := router.Group("warung/pelanggan")
+	pelanggan := router.Group("pelanggan")
 	pelanggan.POST("", newPelangganController.CreateNewPelanggan)
 	pelanggan.GET("", newPelangganController.GetAllPelanggan)
 	pelanggan.GET("/:id", newPelangganController.GetPelangganById)

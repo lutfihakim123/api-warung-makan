@@ -124,7 +124,7 @@ func NewRincianController(router *gin.Engine, rincianUseCase usecase.RincianUseC
 		router:         router,
 		rincianUseCase: rincianUseCase,
 	}
-	rincian := router.Group("warung/rincian")
+	rincian := router.Group("rincian")
 	rincian.POST("", newRincianController.CreateNewRincian)
 	rincian.GET("", newRincianController.GetAllRincian)
 	rincian.GET("/:id", newRincianController.GetRincianById)

@@ -109,7 +109,7 @@ func NewKaryawanController(router *gin.Engine, karyawanUseCase usecase.KaryawanU
 		router:          router,
 		karyawanUseCase: karyawanUseCase,
 	}
-	karyawan := router.Group("warung/karyawan")
+	karyawan := router.Group("karyawan")
 	karyawan.POST("", newKaryawanController.CreateNewKaryawan)
 	karyawan.GET("", newKaryawanController.GetAllKaryawan)
 	karyawan.GET("/:id", newKaryawanController.GetKaryawanById)

@@ -109,7 +109,7 @@ func NewMejaController(router *gin.Engine, mejaUseCase usecase.MejaUseCase) *Mej
 		router:      router,
 		mejaUseCase: mejaUseCase,
 	}
-	meja := router.Group("warung/meja")
+	meja := router.Group("meja")
 	meja.POST("", newMejaController.CreateNewMeja)
 	meja.GET("", newMejaController.GetAllMeja)
 	meja.GET("/:id", newMejaController.GetMejaById)
