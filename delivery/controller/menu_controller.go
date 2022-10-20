@@ -132,10 +132,9 @@ func (mc *MenuController) DeleteMenu(ctx *gin.Context) {
 		nameFile := strings.Split(responseUc.Img, "/")
 		path := "assets/img/menu/" + nameFile[3]
 		err := os.Remove(path)
-		error := err
 		ctx.JSON(http.StatusOK, gin.H{
 			"message": "ok",
-			"error":   error,
+			"error":   err,
 		})
 	}
 }
