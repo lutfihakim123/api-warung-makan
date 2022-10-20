@@ -54,9 +54,9 @@ func AuthTokenMiddleware() gin.HandlerFunc {
 func Parsetoken(tokenString string) (jwt.MapClaims, error) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if method, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Signing method invalid")
+			return nil, fmt.Errorf("signing method invalid")
 		} else if method != model.JwtSigningMethod {
-			return nil, fmt.Errorf("Signing method invalid")
+			return nil, fmt.Errorf("signing method invalid")
 		}
 		return model.JwtSignatureKey, nil
 	})
