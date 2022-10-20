@@ -40,7 +40,7 @@ func (a *appServer) initHandlers() {
 
 func (a *appServer) Run() {
 	a.initHandlers()
-	err := a.engine.Run(a.host)
+	err := a.engine.Run()
 	if err != nil {
 		panic(err)
 	}
