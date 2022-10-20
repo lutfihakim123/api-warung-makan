@@ -32,7 +32,7 @@ const (
 	//nota penjualan
 	InsertNota       = `insert into nota_penjualan(id, pelanggan_id, karyawan_id, meja_id, waktu_pesan) values (:id, :pelanggan_id, :karyawan_id, :meja_id, :waktu_pesan)`
 	SelectAllNota    = `select id, pelanggan_id, karyawan_id, meja_id, waktu_pesan , created_at, updated_at from nota_penjualan limit $1 offset $2`
-	SelectNotaById   = `select id, pelanggan_id, karyawan_id, meja_id, waktu_pesan , created_at, updated_at from nota_penjualan limit $1 offset $2`
+	SelectNotaById   = `select id, pelanggan_id, karyawan_id, meja_id, waktu_pesan , created_at, updated_at from nota_penjualan where id=$1`
 	UpdateNota       = `update nota_penjualan set pelanggan_id=:pelanggan_id,  karyawan_id=:karyawan_id, meja_id=:meja_id where id=:id`
 	DeleteNota       = `delete from nota_penjualan where id=$1`
 	UpdateStatusMeja = `update mst_meja set status='used' where id=:meja_id`
