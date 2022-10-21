@@ -1,0 +1,959 @@
+{
+	"info": {
+		"_postman_id": "0d526722-3648-478d-a71a-0acc0aba4be7",
+		"name": "Warung makan API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18513214"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"azra\",\r\n    \"password\" : \"azra123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/auth",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Menu",
+			"item": [
+				{
+					"name": "Get all menu",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/menu",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get menu by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/menu/6f904741-2071-4396-8d00-0fce472ff770",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"menu",
+								"6f904741-2071-4396-8d00-0fce472ff770"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  image menu",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/menu/image/Nasi putih.jfif",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"menu",
+								"image",
+								"Nasi putih.jfif"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update menu",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama",
+									"value": "Nasi Putih",
+									"type": "text"
+								},
+								{
+									"key": "jenis",
+									"value": "Makanan",
+									"type": "text"
+								},
+								{
+									"key": "harga",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/E:/Download/Menu/Nasi putih.jfif"
+								},
+								{
+									"key": "id",
+									"value": "6c0bf89c-34f8-42d1-8700-c9e479a59c6f",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/menu",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete menu",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/menu/3076243f-9787-4e3c-a175-bf78fbc6bef9",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"menu",
+								"3076243f-9787-4e3c-a175-bf78fbc6bef9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add menu",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama",
+									"value": "Nasi putih",
+									"type": "text"
+								},
+								{
+									"key": "jenis",
+									"value": "Makanan",
+									"type": "text"
+								},
+								{
+									"key": "harga",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/E:/Download/Menu/Nasi putih.jfif"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/menu",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"menu"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Karyawan",
+			"item": [
+				{
+					"name": "Get all karyawan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/karyawan",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"karyawan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get karyawan by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/karyawan/91229182-bdd8-4bae-9c51-68e797e2c12f",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"karyawan",
+								"91229182-bdd8-4bae-9c51-68e797e2c12f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update karyawan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nama\" : \"admin\",\r\n  \"alamat\" : \"Cisarua\",\r\n  \"gaji\" : 1500000,\r\n  \"username\"  : \"admin\",\r\n  \"password\"  : \"admin\",\r\n  \"id\" : \"5748ffc1-4cf6-443d-aaa5-1d6063464346\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/karyawan",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"karyawan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete karyawan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/karyawan/5748ffc1-4cf6-443d-aaa5-1d6063464346",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"karyawan",
+								"5748ffc1-4cf6-443d-aaa5-1d6063464346"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add karyawan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nama\" : \"admin\",\r\n  \"alamat\" : \"Cisarua\",\r\n  \"gaji\" : 1500000,\r\n  \"username\"  : \"admin\",\r\n  \"password\"  : \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/karyawan",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"karyawan"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pelanggan",
+			"item": [
+				{
+					"name": "Get all pelanggan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/pelanggan",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pelanggan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get pelanggan by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/pelanggan/b54f0fbe-d978-4a98-a27f-0d3bdacd2ab4",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pelanggan",
+								"b54f0fbe-d978-4a98-a27f-0d3bdacd2ab4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update pelanggan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nama\" : \"test\",\r\n  \"alamat\" : \"Cisarua\",\r\n  \"nohp\" : 627746461,\r\n  \"id\" : \"a88d1d6a-9c01-4895-a95a-c2644b34625c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/pelanggan",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pelanggan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete pelanggan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/pelanggan/a88d1d6a-9c01-4895-a95a-c2644b34625c",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pelanggan",
+								"a88d1d6a-9c01-4895-a95a-c2644b34625c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add pelanggan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nama\" : \"test\",\r\n  \"alamat\" : \"Cisarua\",\r\n  \"nohp\" : 627746461\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/pelanggan",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pelanggan"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rincian",
+			"item": [
+				{
+					"name": "Get all rincian",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/rincian",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"rincian"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get rincian by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/rincian/57558b18-4d81-4c8e-9d5c-2a62c6c2b767",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"rincian",
+								"57558b18-4d81-4c8e-9d5c-2a62c6c2b767"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update rincian",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nota_id\" : \"5fc2496c-8cd6-4c48-b1c5-f5456e776f26\",\r\n  \"menu_id\" : \"6f904741-2071-4396-8d00-0fce472ff770\",\r\n  \"kuantitas\" : 10,\r\n  \"id\" : \"563ee435-90c3-4116-bdd7-d6e746e300d7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/rincian",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"rincian"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete rincian",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/rincian/57558b18-4d81-4c8e-9d5c-2a62c6c2b767",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"rincian",
+								"57558b18-4d81-4c8e-9d5c-2a62c6c2b767"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add rincian",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nota_id\" : \"5fc2496c-8cd6-4c48-b1c5-f5456e776f26\",\r\n  \"menu_id\" : \"6f904741-2071-4396-8d00-0fce472ff770\",\r\n  \"kuantitas\" : 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/rincian",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"rincian"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nota penjualan",
+			"item": [
+				{
+					"name": "Get all nota",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/nota",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"nota"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get nota by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/nota/57f18c67-b7ef-4acb-afbd-b691c5a49166",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"nota",
+								"57f18c67-b7ef-4acb-afbd-b691c5a49166"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update nota",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pelanggan_id\" : \"325e6cda-f52d-4a50-a40b-21749773d6e8\",\r\n  \"karyawan_id\" : \"91229182-bdd8-4bae-9c51-68e797e2c12f\",\r\n  \"meja_id\" : \"9e6e761b-870a-492a-92c3-ac95e0da97c5\",\r\n  \"id\": \"57f18c67-b7ef-4acb-afbd-b691c5a49166\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/nota",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"nota"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/nota/57f18c67-b7ef-4acb-afbd-b691c5a49166",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"nota",
+								"57f18c67-b7ef-4acb-afbd-b691c5a49166"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add nota",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pelanggan_id\" : \"325e6cda-f52d-4a50-a40b-21749773d6e8\",\r\n  \"karyawan_id\" : \"91229182-bdd8-4bae-9c51-68e797e2c12f\",\r\n  \"meja_id\" : \"9e6e761b-870a-492a-92c3-ac95e0da97c5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/nota",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"nota"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report penjualan",
+			"item": [
+				{
+					"name": "Get all report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/report",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get report by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFTklHTUFDQU1QIiwiVXNlcm5hbWUiOiJhenJhIiwiRW1haWwiOiJleGFtcGxlQGVtYWlsLmNvbSJ9.AIJeBfJRDEDNGNnP-rC_846dm6g_yshog00Eh6KLlDM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-warung-makan.herokuapp.com/report/5fc2496c-8cd6-4c48-b1c5-f5456e776f26",
+							"protocol": "https",
+							"host": [
+								"api-warung-makan",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"report",
+								"5fc2496c-8cd6-4c48-b1c5-f5456e776f26"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
