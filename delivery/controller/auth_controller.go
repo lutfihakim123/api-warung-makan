@@ -42,7 +42,7 @@ func NewAuthController(router *gin.Engine, authUseCase usecase.AuthUseCase) *Aut
 		router:      router,
 		authUseCase: authUseCase,
 	}
-	router.Use(auth.AccessControl(), auth.AuthTokenMiddleware())
+	router.Use(auth.AuthTokenMiddleware())
 	router.POST("auth", newAuthController.LoginKaryawan)
 	return &newAuthController
 }
