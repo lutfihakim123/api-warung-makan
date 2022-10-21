@@ -22,7 +22,8 @@ func AuthTokenMiddleware() gin.HandlerFunc {
 		}
 
 		c.Next()
-		if c.Request.URL.Path == "warung/auth" {
+
+		if c.Request.URL.Path == "auth" {
 			c.Next()
 		} else {
 			h := model.AuthHeader{}
