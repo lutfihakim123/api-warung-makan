@@ -12,11 +12,6 @@ import (
 func AuthTokenMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(204)
-			return
-		}
-
 		c.Next()
 		if c.Request.URL.Path == "auth" {
 			c.Next()
@@ -41,6 +36,10 @@ func AuthTokenMiddleware() gin.HandlerFunc {
 			c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 			c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
 			c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+			if c.Request.Method == "OPTIONS" {
+				c.AbortWithStatus(204)
+				return
+			}
 			token, err := Parsetoken(tokenString)
 			if err != nil {
 				c.JSON(401, gin.H{
