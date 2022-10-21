@@ -9,7 +9,7 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func AuthTokenMiddleware() gin.HandlerFunc {
+func AccessControl() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
@@ -22,7 +22,11 @@ func AuthTokenMiddleware() gin.HandlerFunc {
 		}
 
 		c.Next()
+	}
+}
 
+func AuthTokenMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
 		if c.Request.URL.Path == "auth" {
 			c.Next()
 		} else {
